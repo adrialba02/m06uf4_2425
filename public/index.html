@@ -113,7 +113,39 @@ function update ()
 		
 		ball.x += ball_x_dir;
 		ball.y += ball_y_dir;
-	
+
+		if (
+			ball.x - ball_w / 2 <= player1.x + players_w / 2 &&
+			ball.y >= player1.y - players_h / 2 &&
+			ball.y <= player1.y + players_h / 2
+		) {
+			
+			ball_x_dir = Math.abs(ball_x_dir); 
+        
+ 			let randomAngle = Phaser.Math.FloatBetween(-Math.PI / 4, Math.PI / 4);
+		    let speed = Math.sqrt(ball_x_dir ** 2 + ball_y_dir ** 2);
+		
+			ball_x_dir = speed * Math.cos(randomAngle);
+            ball_y_dir = speed * Math.sin(randomAngle);
+			
+		}
+
+		if (
+			ball.x - ball_w / 2 <= player2.x + players_w / 2 &&
+			ball.y >= player2.y - players_h / 2 &&
+			ball.y <= player2.y + players_h / 2
+		) {
+			
+			ball_x_dir = -Math.abs(ball_x_dir); 
+        
+ 			let randomAngle = Phaser.Math.FloatBetween(-Math.PI / 4, Math.PI / 4);
+		    let speed = Math.sqrt(ball_x_dir ** 2 + ball_y_dir ** 2);
+
+			ball_x_dir = speed * Math.cos(randomAngle);
+            ball_y_dir = speed * Math.sin(randomAngle);
+			
+		}
+
 		if (ball.x > win_w) {
 			player1_points += 1;
 			player1PointsText.setText(`Player1: ${player1_points}`);
